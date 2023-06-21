@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-## Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com>
-##
 ## Script To Apply Themes
 
 ## Theme ------------------------------------
@@ -9,9 +7,6 @@ TDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 THEME="${TDIR##*/}"
 
 source "$HOME"/.config/openbox-themes/themes/"$THEME"/theme.bash
-altbackground="`pastel color $background | pastel lighten $light_value | pastel format hex`"
-altforeground="`pastel color $foreground | pastel darken $dark_value | pastel format hex`"
-modbackground=(`pastel gradient -n 7 $background $altbackground | pastel format hex`)
 
 ## Directories ------------------------------
 PATH_CONF="$HOME/.config"
@@ -22,7 +17,6 @@ PATH_OBOX="$PATH_CONF/openbox"
 PATH_OBTS="$PATH_CONF/openbox-themes"
 PATH_PBAR="$PATH_OBTS/themes/$THEME/polybar"
 PATH_ROFI="$PATH_OBTS/themes/$THEME/rofi"
-PATH_XFCE="$PATH_CONF/xfce4/terminal"
 
 ## Wallpaper ---------------------------------
 apply_wallpaper() {
@@ -40,39 +34,21 @@ apply_polybar() {
 	sed -i -e "s/font-0 = .*/font-0 = \"$polybar_font\"/g" ${PATH_PBAR}/config.ini
 
 	# rewrite colors file
-	# cat > ${PATH_PBAR}/colors.ini <<- EOF
-	# 	[color]
-		
-	# 	BACKGROUND = ${background}
-	# 	FOREGROUND = ${foreground}
-	# 	ALTBACKGROUND = ${altbackground}
-	# 	ALTFOREGROUND = ${altforeground}
-	# 	ACCENT = ${accent}
-		
-	# 	BLACK = ${color0}
-	# 	RED = ${color1}
-	# 	GREEN = ${color2}
-	# 	YELLOW = ${color3}
-	# 	BLUE = ${color4}
-	# 	MAGENTA = ${color5}
-	# 	CYAN = ${color6}
-	# 	WHITE = ${color7}
-	# 	ALTBLACK = ${color8}
-	# 	ALTRED = ${color9}
-	# 	ALTGREEN = ${color10}
-	# 	ALTYELLOW = ${color11}
-	# 	ALTBLUE = ${color12}
-	# 	ALTMAGENTA = ${color13}
-	# 	ALTCYAN = ${color14}
-	# 	ALTWHITE = ${color15}
+	cat > ${PATH_PBAR}/colors.ini <<- EOF
+		[color]
 
-	# 	BACKGROUND1 = ${modbackground[1]}
-	# 	BACKGROUND2 = ${modbackground[2]}
-	# 	BACKGROUND3 = ${modbackground[3]}
-	# 	BACKGROUND4 = ${modbackground[4]}
-	# 	BACKGROUND5 = ${modbackground[5]}
-	# 	BACKGROUND6 = ${modbackground[6]}
-	# EOF
+		BACKGROUND = #11111b
+		TEXT = #cdd6f4
+
+		DATE = #74c7ec
+		NETWORK = #fab387
+		VOLUME = #cba6f7
+
+		CURRENT = #f38ba8
+		OCCUPIED = #74c7ec
+		EMPTY = #cdd6f4
+		URGENT = #f9e2af
+	EOF
 
 	# launch polybar
 	bash ${PATH_OBTS}/themes/polybar.sh
@@ -93,16 +69,16 @@ apply_rofi() {
 	sed -i -e "s/font:.*/font: \"$rofi_font\";/g" ${PATH_ROFI}/shared/fonts.rasi
 
 	# rewrite colors file
-	# cat > ${PATH_ROFI}/shared/colors.rasi <<- EOF
-	# 	* {
-	# 	    background:     ${background};
-	# 	    background-alt: ${modbackground[2]};
-	# 	    foreground:     ${foreground};
-	# 	    selected:       ${accent};
-	# 	    active:         ${color2};
-	# 	    urgent:         ${color1};
-	# 	}
-	# EOF
+	cat > ${PATH_ROFI}/shared/colors.rasi <<- EOF
+		* {
+			background:     #11111b;
+			background-alt: #313244;
+			foreground:     #cdd6f4;
+			selected:       #cba6f7;
+			active:         #a6e3a1;
+			urgent:         #f9e2af;
+		}
+	EOF
 
 	# modify icon theme
 	if [[ -f "$PATH_CONF"/rofi/config.rasi ]]; then
@@ -125,44 +101,7 @@ apply_terminal() {
 		-e "s/size: .*/size: $terminal_font_size/g"
 
 	# alacritty : colors
-	cat > ${PATH_TERM}/colors.yml <<- _EOF_
-		## Colors configuration
-		colors:
-		  # Default colors
-		  primary:
-		    background: '${background}'
-		    foreground: '${foreground}'
-
-		  # Normal colors
-		  normal:
-		    black:   '${color0}'
-		    red:     '${color1}'
-		    green:   '${color2}'
-		    yellow:  '${color3}'
-		    blue:    '${color4}'
-		    magenta: '${color5}'
-		    cyan:    '${color6}'
-		    white:   '${color7}'
-
-		  # Bright colors
-		  bright:
-		    black:   '${color8}'
-		    red:     '${color9}'
-		    green:   '${color10}'
-		    yellow:  '${color11}'
-		    blue:    '${color12}'
-		    magenta: '${color13}'
-		    cyan:    '${color14}'
-		    white:   '${color15}'
-	_EOF_
-
-	# xfce terminal : fonts & colors
-	sed -i ${PATH_XFCE}/terminalrc \
-		-e "s/FontName=.*/FontName=$terminal_font_name $terminal_font_size/g" \
-		-e "s/ColorBackground=.*/ColorBackground=${background}/g" \
-		-e "s/ColorForeground=.*/ColorForeground=${foreground}/g" \
-		-e "s/ColorCursor=.*/ColorCursor=${foreground}/g" \
-		-e "s/ColorPalette=.*/ColorPalette=${color0};${color1};${color2};${color3};${color4};${color5};${color6};${color7};${color8};${color9};${color10};${color11};${color12};${color13};${color14};${color15}/g"
+	cp $terminal_colors ${PATH_TERM}/colors.yml
 }
 
 # Geany -------------------------------------
@@ -252,28 +191,28 @@ apply_dunst() {
 		-e "s/font = .*/font = $dunst_font/g" \
 		-e "s/frame_width = .*/frame_width = $dunst_border/g" \
 		-e "s/separator_height = .*/separator_height = $dunst_separator/g" \
-		-e "s/line_height = .*/line_height = $dunst_separator/g"
+		-e "s/line_height = .*/line_height = $dunst_separator/g"\
+		-e "s/corner_radius = .*/corner_radius = $dunst_corner_radius/g"
 
 	# modify colors
 	sed -i '/urgency_low/Q' ${PATH_DUNST}/dunstrc
 	cat >> ${PATH_DUNST}/dunstrc <<- _EOF_
+		[global]
+		frame_color = "#89B4FA"
+		separator_color= frame
+
 		[urgency_low]
-		timeout = 2
-		background = "${background}"
-		foreground = "${foreground}"
-		frame_color = "${altbackground}"
+		background = "#1E1E2E"
+		foreground = "#CDD6F4"
 
 		[urgency_normal]
-		timeout = 5
-		background = "${background}"
-		foreground = "${foreground}"
-		frame_color = "${altbackground}"
+		background = "#1E1E2E"
+		foreground = "#CDD6F4"
 
 		[urgency_critical]
-		timeout = 0
-		background = "${background}"
-		foreground = "${color1}"
-		frame_color = "${color1}"
+		background = "#1E1E2E"
+		foreground = "#CDD6F4"
+		frame_color = "#FAB387"
 	_EOF_
 
 	# restart dunst

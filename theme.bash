@@ -4,27 +4,7 @@
 
 # Colors
 background='#24273a'
-foreground='#c4c7c5'
-color0='#263640'
-color1='#ec7875'
-color2='#61c766'
-color3='#fdd835'
-color4='#42a5f5'
-color5='#ba68c8'
-color6='#4dd0e1'
-color7='#bfbaac'
-color8='#4a697d'
-color9='#fb8784'
-color10='#70d675'
-color11='#ffe744'
-color12='#51b4ff'
-color13='#c979d7'
-color14='#5cdff0'
-color15='#fdf6e3'
-
-accent='#00BCD4'
-light_value='0.15'
-dark_value='0.30'
+foreground='#f8f8f2'
 
 # Wallpaper
 wdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
@@ -40,6 +20,9 @@ rofi_icon='Papirus-Apps'
 # Terminal
 terminal_font_name='JetBrainsMono Nerd Font'
 terminal_font_size='10'
+
+wdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+terminal_colors="$wdir/terminal-colors.yml"
 
 # Geany
 geany_colors='catppuccin-mocha.conf'
@@ -70,6 +53,7 @@ dunst_origin='top-right'
 dunst_font='Iosevka Custom 9'
 dunst_border='1'
 dunst_separator='2'
+dunst_corner_radius='8'
 
 # Plank
 plank_hmode='auto'
