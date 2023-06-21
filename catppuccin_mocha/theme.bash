@@ -1,10 +1,10 @@
 # ------------------------------------------------------------------------------
-# Catppuccin-Mocha
+# Catppuccin-Mocha theme for Archcraft
 # ------------------------------------------------------------------------------
 
 # Colors
-background='#24273a'
-text='#cdd6f4'
+background='#1e1e2e' #base
+text='#cdd6f4' #text
 
 
 # Wallpaper
@@ -13,24 +13,24 @@ wallpaper="$wdir/wallpaper"
 
 # Polybar
 polybar_font='Iosevka Nerd Font:size=10;3'
-polybar_background='#11111b'
-polybar_date='#74c7ec'
-polybar_network='#fab387'
-polybar_volume='#cba6f7'
-polybar_current_workspace='#f38ba8'
-polybar_occupied_workspace='#74c7ec'
-polybar_urgent_workspace='#f9e2af'
-polybar_empty_workspace='#cdd6f4'
+polybar_background='#11111b' #crust
+polybar_date='#74c7ec' #sapphire
+polybar_network='#fab387' #peach
+polybar_volume='#cba6f7' #mauve
+polybar_current_workspace='#f38ba8' #red
+polybar_occupied_workspace='#74c7ec' #sapphire
+polybar_urgent_workspace='#f9e2af' #yellow
+polybar_empty_workspace='#cdd6f4' #text
 
 # Rofi
 rofi_font='Iosevka 10'
 rofi_icon='Papirus-Apps'
-rofi_background='#11111b'
-rofi_background_alt='#313244'
-rofi_foreground='#cdd6f4'
-rofi_selected='#cba6f7'
-rofi_active='#a6e3a1'
-rofi_urgent='#f9e2af'
+rofi_background='#11111b' #crust
+rofi_background_alt='#313244' #surface0
+rofi_foreground='#cdd6f4' #text
+rofi_selected='#cba6f7' #mauve
+rofi_active='#a6e3a1' #green
+rofi_urgent='#f9e2af' #yellow
 
 # Terminal
 terminal_font_name='JetBrainsMono Nerd Font'
