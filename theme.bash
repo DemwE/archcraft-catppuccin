@@ -4,7 +4,6 @@
 
 # Colors
 background='#24273a'
-foreground='#f8f8f2'
 text='#cdd6f4'
 
 
