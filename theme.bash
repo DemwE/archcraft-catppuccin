@@ -5,6 +5,8 @@
 # Colors
 background='#24273a'
 foreground='#f8f8f2'
+text='#cdd6f4'
+
 
 # Wallpaper
 wdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
@@ -12,10 +14,24 @@ wallpaper="$wdir/wallpaper"
 
 # Polybar
 polybar_font='Iosevka Nerd Font:size=10;3'
+polybar_background='#11111b'
+polybar_date='#74c7ec'
+polybar_network='#fab387'
+polybar_volume='#cba6f7'
+polybar_current_workspace='#f38ba8'
+polybar_occupied_workspace='#74c7ec'
+polybar_urgent_workspace='#f9e2af'
+polybar_empty_workspace='#cdd6f4'
 
 # Rofi
 rofi_font='Iosevka 10'
 rofi_icon='Papirus-Apps'
+rofi_background='#11111b'
+rofi_background_alt='#313244'
+rofi_foreground='#cdd6f4'
+rofi_selected='#cba6f7'
+rofi_active='#a6e3a1'
+rofi_urgent='#f9e2af'
 
 # Terminal
 terminal_font_name='JetBrainsMono Nerd Font'

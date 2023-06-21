@@ -37,17 +37,17 @@ apply_polybar() {
 	cat > ${PATH_PBAR}/colors.ini <<- EOF
 		[color]
 
-		BACKGROUND = #11111b
-		TEXT = #cdd6f4
+		BACKGROUND = ${polybar_background}
+		TEXT = ${text}
 
-		DATE = #74c7ec
-		NETWORK = #fab387
-		VOLUME = #cba6f7
+		DATE = ${polybar_date}
+		NETWORK = ${polybar_network}
+		VOLUME = ${polybar_volume}
 
-		CURRENT = #f38ba8
-		OCCUPIED = #74c7ec
-		EMPTY = #cdd6f4
-		URGENT = #f9e2af
+		CURRENT = ${polybar_current_workspace}
+		OCCUPIED = ${polybar_occupied_workspace}
+		URGENT = ${polybar_urgent_workspace}
+		EMPTY = ${polybar_empty_workspace}
 	EOF
 
 	# launch polybar
@@ -71,12 +71,12 @@ apply_rofi() {
 	# rewrite colors file
 	cat > ${PATH_ROFI}/shared/colors.rasi <<- EOF
 		* {
-			background:     #11111b;
-			background-alt: #313244;
-			foreground:     #cdd6f4;
-			selected:       #cba6f7;
-			active:         #a6e3a1;
-			urgent:         #f9e2af;
+			background:     ${rofi_background};
+			background-alt: ${rofi_background_alt};
+			foreground:     ${rofi_foreground};
+			selected:       ${rofi_selected};
+			active:         ${rofi_active};
+			urgent:         ${rofi_urgent};
 		}
 	EOF
 
@@ -281,19 +281,32 @@ notify_user() {
 }
 
 ## Execute Script ---------------------------
+echo "Applying Style : $THEME"
 notify_user
 create_file
+echo "Applying wallpaper"
 apply_wallpaper
+echo "Applying polybar"
 apply_polybar
+echo "Applying rofi"
 apply_rofi
+echo "Applying network menu"
 apply_netmenu
+echo "Applying terminal"
 apply_terminal
+echo "Applying geany"
 apply_geany
+echo "Applying appearance"
 apply_appearance
+echo "Applying openbox"
 apply_obconfig
+echo "Applying dunst"
 apply_dunst
+echo "Applying plank"
 apply_plank
+echo "Applying compositor"
 apply_compositor
+echo "Done"
 
 # fix cursor theme (run it in the end)
 xsetroot -cursor_name left_ptr
